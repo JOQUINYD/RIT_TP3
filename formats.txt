@@ -1,0 +1,42 @@
+{
+    "class1":
+            {
+                "totalDocs" : 44,
+                "terms":
+                        {
+                            "term1":
+                                    {
+                                        "centroid" : 0.952,
+                                        "avgRel" : 0
+                                        "avgNonRel" : 0.12
+                                    },
+                            "term2":
+                                    {
+                                        "centroid" : 0.952,
+                                        "avgRel" : 0
+                                        "avgNonRel" : 0.12
+                                    }     
+                        }
+                               
+            },
+    "class2":
+            {
+                "totalDocs" : 22,
+                "terms":
+                        {
+                            "term1":
+                                    {
+                                        "centroid" : 0.952,
+                                        "avgRel" : 0
+                                        "avgNonRel" : 0.12
+                                    },
+                            "term2":
+                                    {
+                                        "centroid" : 0.952,
+                                        "avgRel" : 0
+                                        "avgNonRel" : 0.12
+                                    }     
+                        }              
+            }
+
+}
