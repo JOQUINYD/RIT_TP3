@@ -1,3 +1,4 @@
+RocchioTraining
 {
     "class1":
             {
@@ -39,4 +40,22 @@
                         }              
             }
 
+}
+
+RocchioTest
+{
+    docId:
+        {
+            "class" : "money",
+            "terms" : [("term1", weight), ("term2", weight)]
+        }
+}
+
+RocchioSimilarities
+{
+    docId:
+        {
+            "orignalClass" : "money",
+            "scale" : [("class1", sim), ("class2", sim)]
+        }
 }
