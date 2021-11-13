@@ -42,5 +42,5 @@ class RocchioClassifier:
 p = CSVParser()
 r = RocchioClassifier()
 
-r.calculateCentroids(p.parseRocchioTraining("training-set.csv"), 0.75, 0.25)
-r.calculateSimilarities(p.parseRocchioTest("test-set.csv"))
+r.calculateCentroids(p.parseTrainingSet("training-set.csv")[1], 0.75, 0.25)
+r.calculateSimilarities(p.parseTestSet("test-set.csv"))
