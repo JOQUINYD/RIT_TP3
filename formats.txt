@@ -1,0 +1,61 @@
+RocchioTraining
+{
+    "class1":
+            {
+                "totalDocs" : 44,
+                "terms":
+                        {
+                            "term1":
+                                    {
+                                        "centroid" : 0.952,
+                                        "avgRel" : 0
+                                        "avgNonRel" : 0.12
+                                    },
+                            "term2":
+                                    {
+                                        "centroid" : 0.952,
+                                        "avgRel" : 0
+                                        "avgNonRel" : 0.12
+                                    }     
+                        }
+                               
+            },
+    "class2":
+            {
+                "totalDocs" : 22,
+                "terms":
+                        {
+                            "term1":
+                                    {
+                                        "centroid" : 0.952,
+                                        "avgRel" : 0
+                                        "avgNonRel" : 0.12
+                                    },
+                            "term2":
+                                    {
+                                        "centroid" : 0.952,
+                                        "avgRel" : 0
+                                        "avgNonRel" : 0.12
+                                    }     
+                        }              
+            }
+
+}
+
+RocchioTest
+{
+    docId:
+        {
+            "class" : "money",
+            "terms" : [("term1", weight), ("term2", weight)]
+        }
+}
+
+RocchioSimilarities
+{
+    docId:
+        {
+            "orignalClass" : "money",
+            "scale" : [("class1", sim), ("class2", sim)]
+        }
+}
