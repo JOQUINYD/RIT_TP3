@@ -6,19 +6,22 @@ class CSVParser:
     def __readCSV(self,path):
         return list(csv.reader(open(path, 'r'), delimiter='\t'))[1:]
 
-    def parse(self,path):
+    def parseRocchioTraining(self,path):
         docs = self.__readCSV(path)
         classes = {}
 
+        numOfDocs = len(docs)
         # calculate avgRel first
         for doc in docs:
             if doc[1] not in classes:
                 classes[doc[1]] = {
                                     "totalDocs" : 1,
-                                    "terms" : {}  
+                                    "totalNonDocs" : numOfDocs - 1,
+                                    "terms" : {}
                                   }
             else:
                 classes[doc[1]]["totalDocs"] += 1
+                classes[doc[1]]["totalNonDocs"] -= 1
             
             for wordWeight in doc[3].split(' '):
                 splited = wordWeight.split('/')
@@ -52,6 +55,25 @@ class CSVParser:
 
         return classes 
 
+    def parseRocchioTest(self, path):
+        docs = self.__readCSV(path)
+        parsedDocs = {}
+
+        for doc in docs:
+            terms = []
+            for wordWeight in doc[3].split(' '):
+                splited = wordWeight.split('/')
+                word = splited[0]
+                weight = float(splited[1])
+                terms += [(word, weight)]
+
+            parsedDocs[doc[0]] = {
+                                    "class" : doc[1],
+                                    "terms" : terms
+                                 }
+        return parsedDocs
 p = CSVParser()
 with open('data.json', 'w') as outfile:
-    json.dump(p.parse("training-set.csv"), outfile, indent=4)
+    json.dump(p.parseRocchioTraining("training-set.csv"), outfile, indent=4)
+with open('data2.json', 'w') as outfile:
+    json.dump(p.parseRocchioTest("test-set.csv"), outfile, indent=4)
