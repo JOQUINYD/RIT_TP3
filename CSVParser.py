@@ -81,9 +81,3 @@ class CSVParser:
                                     "terms" : terms
                                  }
         return parsedDocs
-
-p = CSVParser()
-with open('data.json', 'w') as outfile:
-    json.dump(p.parseTrainingSet("training-set.csv"), outfile, indent=4)
-with open('data2.json', 'w') as outfile:
-    json.dump(p.parseTestSet("test-set.csv"), outfile, indent=4)
