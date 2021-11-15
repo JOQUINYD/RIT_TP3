@@ -53,7 +53,7 @@ class ClassifierHandler:
                                             "f" : 0,
                                             "g" : totalDocs
                                         }
-            assignedClass = similarities[sim]["scale"][0][0]
+            assignedClass = similarities[sim]["assignedClass"]
             if className == assignedClass:
                 evaluation[className]["a"] += 1
 
