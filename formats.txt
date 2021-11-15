@@ -1,4 +1,10 @@
-RocchioTraining
+terms 
+{
+   "term1": 44,
+    "term2": 23   
+}
+
+TrainingSet
 {
     "class1":
             {
@@ -9,13 +15,16 @@ RocchioTraining
                                     {
                                         "centroid" : 0.952,
                                         "avgRel" : 0
-                                        "avgNonRel" : 0.12
+                                        "avgNonRel" : 0.12,
+                                        "frequency" : 1
+
                                     },
                             "term2":
                                     {
                                         "centroid" : 0.952,
                                         "avgRel" : 0
-                                        "avgNonRel" : 0.12
+                                        "avgNonRel" : 0.12,
+                                        "frequency" : 1
                                     }     
                         }
                                
@@ -29,20 +38,23 @@ RocchioTraining
                                     {
                                         "centroid" : 0.952,
                                         "avgRel" : 0
-                                        "avgNonRel" : 0.12
+                                        "avgNonRel" : 0.12,
+                                        "frequency" : 1
+                                
                                     },
                             "term2":
                                     {
                                         "centroid" : 0.952,
                                         "avgRel" : 0
-                                        "avgNonRel" : 0.12
+                                        "avgNonRel" : 0.12,
+                                        "frequency" : 1                                        
                                     }     
                         }              
             }
 
 }
 
-RocchioTest
+TestSet
 {
     docId:
         {
@@ -51,7 +63,7 @@ RocchioTest
         }
 }
 
-RocchioSimilarities
+Similarities
 {
     docId:
         {
