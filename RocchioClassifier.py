@@ -1,5 +1,4 @@
 import json
-from CSVParser import CSVParser
 
 class RocchioClassifier:
     
@@ -17,10 +16,10 @@ class RocchioClassifier:
                 calc2 = (gamma / totalNonDocs) * self.classes[className]["terms"][term]["avgNonRel"]
                 centroid = calc1 - calc2
                 self.classes[className]["terms"][term]["centroid"] = centroid
-        with open('data.json', 'w') as outfile:
+        with open(f'results/RocchioCentroids_{beta}_{gamma}.json', 'w') as outfile:
             json.dump(self.classes, outfile, indent=4)
     
-    def calculateSimilarities(self, testDocs):
+    def calculateSimilarities(self, testDocs, beta, gamma):
         for docId in testDocs:
             scale = []
             for className in self.classes:
@@ -35,12 +34,6 @@ class RocchioClassifier:
                                             "originalClass" : testDocs[docId]["class"],
                                             "scale" : scale.copy()
                                        }
-        with open('data3.json', 'w') as outfile:
+        with open(f'results/RocchioSimilarities_{beta}_{gamma}.json', 'w') as outfile:
             json.dump(self.similarities, outfile, indent=4)
 
-
-p = CSVParser()
-r = RocchioClassifier()
-
-r.calculateCentroids(p.parseTrainingSet("training-set.csv")[1], 0.75, 0.25)
-r.calculateSimilarities(p.parseTestSet("test-set.csv"))

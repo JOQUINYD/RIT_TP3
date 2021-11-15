@@ -28,7 +28,7 @@ class BayesiansClassifier:
 
                 self.centroids[className][termName] = math.log((Pip/(1-Pip)),2) + math.log(((1-Qip)/Qip),2)  
 
-        with open('data.json', 'w') as outfile:
+        with open('results/BayesiansCentroids.json', 'w') as outfile:
             json.dump(self.centroids, outfile, indent=4)
     
     def calculateSimilarities(self, testDocs):
@@ -51,14 +51,5 @@ class BayesiansClassifier:
                                             "originalClass" : testDocs[docId]["class"],
                                             "scale" : scale.copy()
                                        }
-        with open('data3.json', 'w') as outfile:
+        with open('results/BayesiansSimilarities.json', 'w') as outfile:
             json.dump(self.similarities, outfile, indent=4)
-
-
-p = CSVParser()
-r = BayesiansClassifier()
-
-parsedTrainingSet = p.parseTrainingSet("training-set.csv")
-
-r.calculateCentroids(parsedTrainingSet[0],parsedTrainingSet[1], parsedTrainingSet[2] )
-r.calculateSimilarities(p.parseTestSet("test-set.csv"))
