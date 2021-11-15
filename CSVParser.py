@@ -6,9 +6,10 @@ class CSVParser:
     def __readCSV(self,path):
         return list(csv.reader(open(path, 'r'), delimiter='\t'))[1:]
 
-    def parseRocchioTraining(self,path):
+    def parseTrainingSet(self,path):
         docs = self.__readCSV(path)
         classes = {}
+        terms = {}
 
         numOfDocs = len(docs)
         # calculate avgRel first
@@ -32,10 +33,17 @@ class CSVParser:
                     classes[doc[1]]["terms"][word] = {
                                                         "centroid" : 0,
                                                         "avgRel" : weight,
-                                                        "avgNonRel" : 0
+                                                        "avgNonRel" : 0,
+                                                        "frequency" : 1
                                                      }
                 else:
                     classes[doc[1]]["terms"][word]["avgRel"] += weight
+                    classes[doc[1]]["terms"][word]["frequency"] += 1
+                
+                if word not in terms:
+                    terms[word] = 1
+                else:
+                    terms[word] += 1
 
         # calculate avgNonRel
         for relevantClass in classes:
@@ -48,14 +56,15 @@ class CSVParser:
                         classes[relevantClass]["terms"][word] = {
                                                         "centroid" : 0,
                                                         "avgRel" : 0,
-                                                        "avgNonRel" : weight
+                                                        "avgNonRel" : weight,
+                                                        "frequency" : 0
                                                      }
                     else:
-                        classes[relevantClass]["terms"][word]["avgNonRel"] += weight      
+                        classes[relevantClass]["terms"][word]["avgNonRel"] += weight     
+                        
+        return (numOfDocs, classes, terms) 
 
-        return classes 
-
-    def parseRocchioTest(self, path):
+    def parseTestSet(self, path):
         docs = self.__readCSV(path)
         parsedDocs = {}
 
@@ -72,8 +81,3 @@ class CSVParser:
                                     "terms" : terms
                                  }
         return parsedDocs
-p = CSVParser()
-with open('data.json', 'w') as outfile:
-    json.dump(p.parseRocchioTraining("training-set.csv"), outfile, indent=4)
-with open('data2.json', 'w') as outfile:
-    json.dump(p.parseRocchioTest("test-set.csv"), outfile, indent=4)
