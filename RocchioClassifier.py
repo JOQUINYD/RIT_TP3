@@ -32,6 +32,7 @@ class RocchioClassifier:
             scale.reverse()
             self.similarities[docId] = {
                                             "originalClass" : testDocs[docId]["class"],
+                                            "assignedClass" : scale[0][0],
                                             "scale" : scale.copy()
                                        }
         with open(f'results/RocchioSimilarities_{beta}_{gamma}.json', 'w') as outfile:
